@@ -4,12 +4,13 @@ def longest_common_prefix(string1, string2, string3):
     
     :param string1: First input string
     :param string2: Second input string
-    :return: Longest common prefix of the two strings
+    :param string3: Third input string
+    :return: Longest common prefix of the three strings
     """
     # Initialize an empty string to hold the common prefix
     common_prefix = ""
     
-    # Iterate through both strings up to the length of the shorter one
+    # Iterate through three strings up to the length of the shorter one
     for i in range(min(len(string1), len(string2), len(string3))):
         # If characters at the same position are the same, add to common prefix
         if string1[i] == string2[i] == string3[i]:
