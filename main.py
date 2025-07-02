@@ -1,24 +1,42 @@
-def longest_common_prefix(string1, string2, string3):
+def longest_common_prefix(list_of_strings):
     """
-    Returns the longest common prefix of three strings.
+    Returns the longest common prefix of a list of strings.
     
-    :param string1: First input string
-    :param string2: Second input string
-    :param string3: Third input string
+    :param: list of strings
     :return: Longest common prefix of the three strings
     """
-    # Initialize an empty string to hold the common prefix
-    common_prefix = ""
-    
-    # Iterate through three strings up to the length of the shorter one
-    for i in range(min(len(string1), len(string2), len(string3))):
-        # If characters at the same position are the same, add to common prefix
-        if string1[i] == string2[i] == string3[i]:
-            common_prefix += string1[i]
-        #if the characters differ, break the loop and return the common prefix found so far
+    # assume the first string is the longest common prefix
+    prefix = list_of_strings[0] 
+    # if the list of strings is empty, return an empty string
+    if not list_of_strings:
+        return ""
+    else:
+    # iterate through the list of strings from the second string to the end
+        for string in list_of_strings[1:]:
+    # compare the other strings with the first string. As long as the other strings do not start with the assumed prefix, shorten the prefix by one character
+            while string.startswith(prefix) is False:
+                prefix = prefix[:-1]
+                # if the prefix becomes empty, return an empty string
+                if not prefix:
+                    return ""
+    # return the longest common prefix after finishing the iteration
+        return prefix
+def test_case(actual, expected):
+    if actual is not None:
+        if actual == expected:
+            status = "Pass"
         else:
-            break
-    return common_prefix
+            status = "Nope"
 
-print(longest_common_prefix("flower", "flow", "flight"))  # Example usage, should return "fl"
-print(longest_common_prefix("dog", "racecar", "car"))  # Example usage, should return ""
+        print(f"Actual: {actual:<24} Expected: {expected:<24} Result: {status}")
+
+
+# Tests for Problem 6
+print("\nProblem 6")
+test_case(longest_common_prefix(["flower", "flow", "flight"]), "fl")
+test_case(longest_common_prefix(["dog", "racecar", "car"]), "")
+test_case(longest_common_prefix(["alone"]), "alone")
+test_case(longest_common_prefix(["", "", ""]), "")
+test_case(longest_common_prefix(["short", "shortest", "sh"]), "sh")
+test_case(longest_common_prefix(["", "abc", "abd"]), "")
+test_case(longest_common_prefix(["interview", "internet", "internal"]), "inter")
